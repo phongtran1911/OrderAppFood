@@ -1,0 +1,4 @@
+export default {
+	LOGOUT_EVENT: 'LOGOUT_EVENT',
+	LOGIN_EVENT: 'LOGIN_EVENT'
+}
