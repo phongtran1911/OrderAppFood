@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-import {View, FlatList, Text} from 'react-native';
+import {View, FlatList, Text, TouchableOpacity, Image} from 'react-native';
 import {connect} from 'react-redux';
 import {fetchData} from '../../../redux/actionCreators/orderedAction/listOrderedAction';
 import styles from '../../styles/listStyle';
+import icEdit from '../../../icons/edit.png';
+import icConfirm from '../../../icons/confirm.png';
 class ListOrdered extends Component {
   componentDidMount() {
     this.props.fetchData();
@@ -17,14 +19,36 @@ class ListOrdered extends Component {
             renderItem={({item}) => (
               <View style={styles.productContainer}>
                 <View style={styles.productInfo}>
-                  <Text style={styles.txtName}>{item.Mon + "-" + item.LoaiTo + "-" + item.Ban}</Text>                  
-                  <Text style={styles.txtPrice}>{item.LoaiMon + " " + item.KhongLay + item.MonThem + item.Nuoc}</Text>
-                  <Text style={styles.txtMaterial}>{"Số tiền: " + item.Tien + " Số lượng: " + item.SoLuong}</Text>
-                  {item.MangVe !== "Tại Bàn" ? <Text style={styles.txtPrice}>{item.MangVe}</Text> : null}
+                  <Text style={styles.txtName}>
+                    {item.Mon + '-' + item.LoaiTo + '-' + item.Ban}
+                  </Text>
+                  <Text style={styles.txtPrice}>
+                    {item.LoaiMon +
+                      ' ' +
+                      item.KhongLay +
+                      item.MonThem +
+                      item.Nuoc}
+                  </Text>
+                  <Text style={styles.txtMaterial}>
+                    {'Số tiền: ' + item.Tien + ' Số lượng: ' + item.SoLuong}
+                  </Text>
+                  {item.MangVe !== 'Tại Bàn' ? (
+                    <Text style={styles.txtPrice}>{item.MangVe}</Text>
+                  ) : null}
                 </View>
                 <View style={styles.lastRowInfoList}>
-                  <Text style={{color: "red"}}>{"Trạng thái: " + item.TrangThai}</Text>
-                  <Text>{item.NguoiDat + ", " + item.NgayTao}</Text>
+                  <View style={{flexDirection:'row'}}>
+                    <TouchableOpacity onPress={() => console.log('ahihi')}>
+                      <Image source={icEdit} style={styles.imageStyle} />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => console.log('ahihi')}>
+                      <Image source={icConfirm} style={styles.imageStyle} />
+                    </TouchableOpacity>
+                  </View>
+                  <Text style={{color: 'red'}}>
+                    {'Trạng thái: ' + item.TrangThai}
+                  </Text>
+                  <Text>{item.NguoiDat + ', ' + item.NgayTao}</Text>
                 </View>
               </View>
             )}
