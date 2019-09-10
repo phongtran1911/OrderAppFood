@@ -1,13 +1,30 @@
 import React, {Component} from 'react';
-import {View, FlatList, Text, TouchableOpacity, Image} from 'react-native';
+import {
+  View,
+  FlatList,
+  Text,
+  TouchableOpacity,
+  Image,
+  Alert,
+} from 'react-native';
 import {connect} from 'react-redux';
 import {fetchData} from '../../../redux/actionCreators/orderedAction/listOrderedAction';
 import styles from '../../styles/listStyle';
 import icEdit from '../../../icons/edit.png';
 import icConfirm from '../../../icons/confirm.png';
+import {fetchDataUpdateStatusOrdered} from '../../../redux/actionCreators/orderedAction/postOrderedAction';
 class ListOrdered extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      refreshing: false,
+    };
+  }
   componentDidMount() {
     this.props.fetchData();
+  }
+  onUpdateStatus(id) {
+    this.props.fetchDataUpdateStatusOrdered(id);
   }
   _keyExtractor = item => item.id;
   render() {
@@ -37,11 +54,12 @@ class ListOrdered extends Component {
                   ) : null}
                 </View>
                 <View style={styles.lastRowInfoList}>
-                  <View style={{flexDirection:'row'}}>
+                  <View style={{flexDirection: 'row'}}>
                     <TouchableOpacity onPress={() => console.log('ahihi')}>
                       <Image source={icEdit} style={styles.imageStyle} />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => console.log('ahihi')}>
+                    <TouchableOpacity
+                      onPress={() => this.onUpdateStatus(item.id)}>
                       <Image source={icConfirm} style={styles.imageStyle} />
                     </TouchableOpacity>
                   </View>
@@ -52,6 +70,12 @@ class ListOrdered extends Component {
                 </View>
               </View>
             )}
+            onRefresh={() => {
+              this.setState({refreshing: true});
+              this.props.fetchData();
+              this.setState({refreshing: false});
+            }}
+            refreshing={this.state.refreshing}
             keyExtractor={this._keyExtractor}
           />
         </View>
@@ -66,5 +90,8 @@ function mapStateToProps(state) {
 }
 export default connect(
   mapStateToProps,
-  {fetchData},
+  {
+    fetchData,
+    fetchDataUpdateStatusOrdered,
+  },
 )(ListOrdered);
