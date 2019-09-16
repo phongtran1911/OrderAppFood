@@ -1,15 +1,13 @@
 import React, {Component} from 'react';
 import {View, Text, FlatList, CheckBox} from 'react-native';
 import {connect} from 'react-redux';
-import {fetchData_Drink} from '../../../../redux/actionCreators/orderAction/listDrinkAction';
-import saver from '../../../../utils/saver';
-class ListDrink extends Component {
+import {fetchData_Drink} from '../../../redux/actionCreators/orderAction/listDrinkAction';
+import saver from '../../../utils/saver';
+class EditListDrink extends Component {
   constructor(props) {
     super(props);
     this.state = {
       arrData: [],
-      isVisible: false,
-      countCart: this.props.countCart,
     };
   }
   componentWillReceiveProps(nextProps) {
@@ -95,4 +93,4 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   {fetchData_Drink},
-)(ListDrink);
+)(EditListDrink);

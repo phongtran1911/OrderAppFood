@@ -1,18 +1,12 @@
 import React, {Component} from 'react';
-import {
-  View,
-  FlatList,
-  Text,
-  TouchableOpacity,
-  Image,
-  Alert,
-} from 'react-native';
+import {View, FlatList, Text, TouchableOpacity, Image} from 'react-native';
 import {connect} from 'react-redux';
 import {fetchData} from '../../../redux/actionCreators/orderedAction/listOrderedAction';
 import styles from '../../styles/listStyle';
 import icEdit from '../../../icons/edit.png';
 import icConfirm from '../../../icons/confirm.png';
 import {fetchDataUpdateStatusOrdered} from '../../../redux/actionCreators/orderedAction/postOrderedAction';
+import {Actions} from 'react-native-router-flux';
 class ListOrdered extends Component {
   constructor(props) {
     super(props);
@@ -54,15 +48,26 @@ class ListOrdered extends Component {
                   ) : null}
                 </View>
                 <View style={styles.lastRowInfoList}>
-                  <View style={{flexDirection: 'row'}}>
-                    <TouchableOpacity onPress={() => console.log('ahihi')}>
-                      <Image source={icEdit} style={styles.imageStyle} />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={() => this.onUpdateStatus(item.id)}>
-                      <Image source={icConfirm} style={styles.imageStyle} />
-                    </TouchableOpacity>
-                  </View>
+                  {item.idDelivery > 1 ? null : (
+                    <View style={{flexDirection: 'row'}}>
+                      <TouchableOpacity
+                        onPress={() =>
+                          Actions.push('editordered', {
+                            idOrderDetail: item.id,
+                            idFood: item.idFood,
+                            Note: item.GhiChu,
+                            isTakeaway:
+                              item.MangVe !== 'Tại Bàn' ? true : false,
+                          })
+                        }>
+                        <Image source={icEdit} style={styles.imageStyle} />
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() => this.onUpdateStatus(item.id)}>
+                        <Image source={icConfirm} style={styles.imageStyle} />
+                      </TouchableOpacity>
+                    </View>
+                  )}
                   <Text style={{color: 'red'}}>
                     {'Trạng thái: ' + item.TrangThai}
                   </Text>

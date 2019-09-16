@@ -1,2 +1,2 @@
-const url = 'http://192.168.137.176/api/';
+const url = 'http://192.168.179.170/api/';
 module.exports = url;

@@ -6,15 +6,15 @@
 //     onSignIn: null
 // };
 
-let onSignIn = undefined
+let onSignIn = undefined;
 
-const setonSignIn = (data) => {
-    onSignIn = data
-}
+const setonSignIn = data => {
+  onSignIn = data;
+};
 const getonSignIn = () => {
-    return onSignIn
-}
+  return onSignIn;
+};
 export default {
-    setonSignIn,
-    getonSignIn
-}
+  setonSignIn,
+  getonSignIn,
+};
