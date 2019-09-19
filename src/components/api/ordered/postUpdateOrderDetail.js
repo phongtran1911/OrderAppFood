@@ -1,6 +1,6 @@
 import url from '../UrlDefault';
-const postOrderOnlyFood = (data, user_id) =>
-  fetch(url + 'Order/postOrderOnlyFood/' + user_id, {
+const postUpdateOrderDetail = (data, idOrderDetail) =>
+  fetch(url + 'Order/postUpdateOrderOnlyFood/' + idOrderDetail, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -11,4 +11,4 @@ const postOrderOnlyFood = (data, user_id) =>
     .then(res => res.json())
     .then(resJson => JSON.parse(resJson).status);
 
-module.exports = postOrderOnlyFood;
+module.exports = postUpdateOrderDetail;

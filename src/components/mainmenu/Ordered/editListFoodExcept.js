@@ -13,19 +13,41 @@ class EditListFoodExcept extends Component {
   }
   componentWillReceiveProps(nextProps) {
     const arr = [];
+    const resultID = [];
+    const resultName = [];
     if (nextProps.mylistFoodExcept.type === 'SUCCESS_FETCH_DATA_FOODEXCEPT') {
       const {listFoodExcept} = nextProps.mylistFoodExcept;
       listFoodExcept.map(item => {
         item.checked = false;
         arr.push(item);
       });
-      this.setState({arrData: arr}, () => console.log("aaa", this.state.arrData));
+      this.setState({arrData: arr}, () => {
+        if (this.props.idFoodExcept.length > 0) {
+          this.state.arrData.map(item => {
+            this.props.idFoodExcept.forEach(element => {
+              if (element.id === item.id) {
+                item.checked = true;
+                resultID.push({id: item.id});
+                resultName.push(item.Name);
+              }
+              var rv = {};
+              for (var i = 0; i < resultID.length; ++i) {
+                rv[i] = resultID[i];
+              }
+              saver.setDataFoodExceptID(rv, resultName);
+            });
+          });
+        }
+      });
     }
   }
   _keyExtractor = item => item.id;
   componentDidMount() {
     this.props.fetchDataFoodExcept(this.props.is_Morning);
     saver.setDataFoodExceptID(undefined, undefined);
+    saver.setDataDrinkID(undefined, undefined);
+    saver.setDataFoodAddID(undefined, undefined);
+    saver.setDataBowlTypeID(undefined, undefined);
   }
   onChecked(id) {
     const result = [];

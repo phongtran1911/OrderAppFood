@@ -16,12 +16,18 @@ class EditListBowlType extends Component {
       const {listBowlType} = nextProps.mylistBowlType;
       listBowlType.map(item => {
         item.checked = false;
-        if (item.id === '2') {
+        if (item.id === this.props.idBowlType) {
           item.checked = true;
         }
         arr.push(item);
       });
-      this.setState({arrData: arr});
+      this.setState({arrData: arr}, () => {
+        this.state.arrData.map(item => {
+          if (item.id === this.props.idBowlType) {
+            item.checked = true;
+          }
+        });
+      });
       this.getBowlTypeID(arr);
     }
   }

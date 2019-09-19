@@ -13,13 +13,32 @@ class EditListFoodType extends Component {
   }
   componentWillReceiveProps(nextProps) {
     const arr = [];
+    const resultID = [];
+    const resultName = [];
     if (nextProps.mylistFoodType.type === 'SUCCESS_FETCH_DATA_FOODTYPE') {
       const {listFoodType} = nextProps.mylistFoodType;
       listFoodType.map(item => {
         item.checked = false;
         arr.push(item);
       });
-      this.setState({arrData: arr});
+      this.setState({arrData: arr}, () => {
+        if (this.props.idFoodType.length > 0) {
+          this.state.arrData.map(item => {
+            this.props.idFoodType.forEach(element => {
+              if (element.id === item.id) {
+                item.checked = true;
+                resultID.push({id: item.id});
+                resultName.push(item.Name);
+              }
+              var rv = {};
+              for (var i = 0; i < resultID.length; ++i) {
+                rv[i] = resultID[i];
+              }
+              saver.setDataFoodTypeID(rv, resultName);
+            });
+          });
+        }
+      });
     }
   }
   _keyExtractor = item => item.id;

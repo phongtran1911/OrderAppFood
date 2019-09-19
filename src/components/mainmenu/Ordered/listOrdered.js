@@ -5,6 +5,7 @@ import {fetchData} from '../../../redux/actionCreators/orderedAction/listOrdered
 import styles from '../../styles/listStyle';
 import icEdit from '../../../icons/edit.png';
 import icConfirm from '../../../icons/confirm.png';
+import icTrash from '../../../icons/trash.png';
 import {fetchDataUpdateStatusOrdered} from '../../../redux/actionCreators/orderedAction/postOrderedAction';
 import {Actions} from 'react-native-router-flux';
 class ListOrdered extends Component {
@@ -51,20 +52,26 @@ class ListOrdered extends Component {
                   {item.idDelivery > 1 ? null : (
                     <View style={{flexDirection: 'row'}}>
                       <TouchableOpacity
+                        onPress={() => this.onUpdateStatus(item.id)}>
+                        <Image source={icConfirm} style={styles.icStyle} />
+                      </TouchableOpacity>
+                      <TouchableOpacity
                         onPress={() =>
                           Actions.push('editordered', {
                             idOrderDetail: item.id,
                             idFood: item.idFood,
                             Note: item.GhiChu,
+                            idTable: item.idTable,
+                            Quantity: item.SoLuong,
                             isTakeaway:
                               item.MangVe !== 'Tại Bàn' ? true : false,
                           })
                         }>
-                        <Image source={icEdit} style={styles.imageStyle} />
+                        <Image source={icEdit} style={styles.icStyle} />
                       </TouchableOpacity>
                       <TouchableOpacity
-                        onPress={() => this.onUpdateStatus(item.id)}>
-                        <Image source={icConfirm} style={styles.imageStyle} />
+                        onPress={() => console.log('hihihihih')}>
+                        <Image source={icTrash} style={styles.icStyle} />
                       </TouchableOpacity>
                     </View>
                   )}

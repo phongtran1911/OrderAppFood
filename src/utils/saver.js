@@ -1,75 +1,82 @@
-let myFoodTypeID = undefined
-let myFoodTypeName = undefined
-let myFoodExceptID = undefined
-let myFoodExceptName = undefined
-let myBowlTypeID = undefined
-let myBowlTypeName = undefined
-let myFoodAddID = undefined
-let myFoodAddName = undefined
-let myDrinkID = undefined
-let myDrinkName = undefined
-let myFoodAddUseID = undefined
-let myFoodAddUseName = undefined
+let myFoodTypeID = undefined;
+let myFoodTypeName = undefined;
+let myFoodExceptID = undefined;
+let myFoodExceptName = undefined;
+let myBowlTypeID = undefined;
+let myBowlTypeName = undefined;
+let myFoodAddID = undefined;
+let myFoodAddName = undefined;
+let myDrinkID = undefined;
+let myDrinkName = undefined;
+let myFoodAddUseID = undefined;
+let myFoodAddUseName = undefined;
+let myTableID = undefined;
 const setDataFoodTypeID = (id, name) => {
-  myFoodTypeID = id
-  myFoodTypeName = name
-}
+  myFoodTypeID = id;
+  myFoodTypeName = name;
+};
 const getDataFoodTypeID = () => {
-  return myFoodTypeID
-}
+  return myFoodTypeID;
+};
 const getDataFoodTypeName = () => {
-  return myFoodTypeName
-}
+  return myFoodTypeName;
+};
 const setDataFoodExceptID = (id, name) => {
-  myFoodExceptID = id
-  myFoodExceptName = name
-}
+  myFoodExceptID = id;
+  myFoodExceptName = name;
+};
 const getDataFoodExceptID = () => {
-  return myFoodExceptID
-}
+  return myFoodExceptID;
+};
 const getDataFoodExceptName = () => {
-  return myFoodExceptName
-}
+  return myFoodExceptName;
+};
 const setDataBowlTypeID = (id, name) => {
-  myBowlTypeID = id
-  myBowlTypeName = name
-}
+  myBowlTypeID = id;
+  myBowlTypeName = name;
+};
 const getDataBowlTypeID = () => {
-  return myBowlTypeID
-}
+  return myBowlTypeID;
+};
 const getDataBowlTypeName = () => {
-  return myBowlTypeName
-}
+  return myBowlTypeName;
+};
 const setDataFoodAddID = (id, name) => {
-  myFoodAddID = id
-  myFoodAddName = name
-}
+  myFoodAddID = id;
+  myFoodAddName = name;
+};
 const getDataFoodAddID = () => {
-  return myFoodAddID
-}
+  return myFoodAddID;
+};
 const getDataFoodAddName = () => {
-  return myFoodAddName
-}
+  return myFoodAddName;
+};
 const setDataDrinkID = (id, name) => {
-  myDrinkID = id
-  myDrinkName = name
-}
+  myDrinkID = id;
+  myDrinkName = name;
+};
 const getDataDrinkID = () => {
-  return myDrinkID
-}
+  return myDrinkID;
+};
 const getDataDrinkName = () => {
-  return myDrinkName
-}
+  return myDrinkName;
+};
 const setDataFoodAddUseID = (id, name) => {
-  myFoodAddUseID = id
-  myFoodAddUseName = name
-}
+  myFoodAddUseID = id;
+  myFoodAddUseName = name;
+};
 const getDataFoodAddUseID = () => {
-  return myFoodAddUseID
-}
+  return myFoodAddUseID;
+};
 const getDataFoodAddUseName = () => {
-  return myFoodAddUseName
-}
+  return myFoodAddUseName;
+};
+const setDataTableID = id => {
+  myTableID = id;
+};
+const getDataTableID = () => {
+  return myTableID;
+};
 export default {
   setDataFoodTypeID,
   setDataBowlTypeID,
@@ -77,13 +84,15 @@ export default {
   setDataFoodAddID,
   setDataFoodExceptID,
   setDataFoodAddUseID,
-  
+  setDataTableID,
+
   getDataFoodTypeID,
   getDataBowlTypeID,
   getDataDrinkID,
   getDataFoodAddID,
   getDataFoodAddUseID,
   getDataFoodExceptID,
+  getDataTableID,
 
   getDataFoodTypeName,
   getDataBowlTypeName,
@@ -91,4 +100,4 @@ export default {
   getDataFoodAddName,
   getDataFoodAddUseName,
   getDataFoodExceptName,
-}
+};

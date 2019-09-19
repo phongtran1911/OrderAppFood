@@ -12,13 +12,28 @@ class EditListDrink extends Component {
   }
   componentWillReceiveProps(nextProps) {
     const arr = [];
+    const resultID = [];
+    const resultName = [];
     if (nextProps.mylistDrink.type === 'SUCCESS_FETCH_DATA_DRINK') {
       const {listDrink} = nextProps.mylistDrink;
       listDrink.map(item => {
         item.checked = false;
         arr.push(item);
       });
-      this.setState({arrData: arr});
+      this.setState({arrData: arr}, () => {
+        this.state.arrData.map(item => {
+          if (item.id === this.props.idDrink) {
+            item.checked = true;
+            resultID.push({id: item.id, total: item.Price});
+            resultName.push(item.Name);
+          }
+          var rv = {};
+          for (var i = 0; i < resultID.length; ++i) {
+            rv[i] = resultID[i];
+          }
+          saver.setDataDrinkID(rv, resultName);
+        });
+      });
     }
   }
   _keyExtractor = item => item.id;

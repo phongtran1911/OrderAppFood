@@ -26,6 +26,9 @@ class ListFoodExcept extends Component {
   componentDidMount() {
     this.props.fetchDataFoodExcept(this.props.is_Morning);
     saver.setDataFoodExceptID(undefined, undefined);
+    saver.setDataDrinkID(undefined, undefined);
+    saver.setDataFoodAddID(undefined, undefined);
+    saver.setDataBowlTypeID(undefined, undefined);
   }
   onChecked(id) {
     const result = [];

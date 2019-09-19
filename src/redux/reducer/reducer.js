@@ -14,6 +14,7 @@ import postOrderOnlyFoodReducer from './orderReducer/postOrderOnlyFoodReducer';
 import listFoodAfternoonReducer from './foodReducer/listFoodAfternoon';
 import listOrderedReducer from './orderedReducer/listOrderedReducer';
 import getOrderDetailReducer from './orderedReducer/getOrderDetailReducer';
+import postUpdateOrderDetailReducer from './orderedReducer/postUpdateOrderDetailReducer';
 
 const reducer = combineReducers({
   isAdding: isAddingReducer,
@@ -30,6 +31,7 @@ const reducer = combineReducers({
   listFoodAfternoon: listFoodAfternoonReducer,
   listOrdered: listOrderedReducer,
   getOrderDetail: getOrderDetailReducer,
+  postUpdateOrderDetail: postUpdateOrderDetailReducer,
 });
 
 export default reducer;

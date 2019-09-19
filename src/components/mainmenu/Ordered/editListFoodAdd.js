@@ -16,13 +16,30 @@ class EditListFoodAdd extends Component {
   componentWillReceiveProps(nextProps) {
     const arr = [];
     const arr1 = [];
+    const resultID = [];
+    const resultName = [];
+    const resultID1 = [];
+    const resultName1 = [];
     if (nextProps.mylistFoodAdd.type === 'SUCCESS_FETCH_DATA_FOODADD') {
       const {listFoodAdd} = nextProps.mylistFoodAdd;
       listFoodAdd.map(item => {
         item.checked = false;
         arr.push(item);
       });
-      this.setState({arrData: arr});
+      this.setState({arrData: arr}, () => {
+        this.state.arrData.map(item => {
+          if (item.id === this.props.idFoodAdd) {
+            item.checked = true;
+            resultID.push({id: item.id, total: item.Price});
+            resultName.push(item.Name);
+          }
+          var rv = {};
+          for (var i = 0; i < resultID.length; ++i) {
+            rv[i] = resultID[i];
+          }
+          saver.setDataFoodAddID(rv, resultName);
+        });
+      });
     }
     if (nextProps.mylistFoodAddUse.type === 'SUCCESS_FETCH_DATA_FOODADD_USE') {
       const {listFoodAddUse} = nextProps.mylistFoodAddUse;
@@ -30,7 +47,24 @@ class EditListFoodAdd extends Component {
         item.checked = false;
         arr1.push(item);
       });
-      this.setState({arrDataFoodAddUse: arr1});
+      this.setState({arrDataFoodAddUse: arr1}, () => {
+        if (this.props.idFoodType.length > 0) {
+          this.state.arrDataFoodAddUse.map(item => {
+            this.props.idFoodType.forEach(element => {
+              if (element.id === item.id) {
+                item.checked = true;
+                resultID1.push({id: item.id});
+                resultName1.push(item.Name);
+              }
+              var rv1 = {};
+              for (var i = 0; i < resultID1.length; ++i) {
+                rv1[i] = resultID1[i];
+              }
+              saver.setDataFoodTypeID(rv1, resultName1);
+            });
+          });
+        }
+      });
     }
   }
   _keyExtractor = item => item.id;
