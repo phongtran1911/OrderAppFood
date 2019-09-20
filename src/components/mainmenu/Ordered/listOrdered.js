@@ -6,7 +6,10 @@ import styles from '../../styles/listStyle';
 import icEdit from '../../../icons/edit.png';
 import icConfirm from '../../../icons/confirm.png';
 import icTrash from '../../../icons/trash.png';
-import {fetchDataUpdateStatusOrdered} from '../../../redux/actionCreators/orderedAction/postOrderedAction';
+import {
+  fetchDataUpdateStatusOrdered,
+  fetchDataDeleteOrderDetail,
+} from '../../../redux/actionCreators/orderedAction/postOrderedAction';
 import {Actions} from 'react-native-router-flux';
 class ListOrdered extends Component {
   constructor(props) {
@@ -20,6 +23,9 @@ class ListOrdered extends Component {
   }
   onUpdateStatus(id) {
     this.props.fetchDataUpdateStatusOrdered(id);
+  }
+  onDeleteOrderDetail(idOrder, idOrdered) {
+    this.props.fetchDataDeleteOrderDetail(idOrder, idOrdered);
   }
   _keyExtractor = item => item.id;
   render() {
@@ -70,7 +76,9 @@ class ListOrdered extends Component {
                         <Image source={icEdit} style={styles.icStyle} />
                       </TouchableOpacity>
                       <TouchableOpacity
-                        onPress={() => console.log('hihihihih')}>
+                        onPress={() =>
+                          this.onDeleteOrderDetail(item.idOrder, item.id)
+                        }>
                         <Image source={icTrash} style={styles.icStyle} />
                       </TouchableOpacity>
                     </View>
@@ -105,5 +113,6 @@ export default connect(
   {
     fetchData,
     fetchDataUpdateStatusOrdered,
+    fetchDataDeleteOrderDetail,
   },
 )(ListOrdered);
