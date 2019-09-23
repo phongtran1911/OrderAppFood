@@ -1,28 +1,36 @@
 import React, {Component} from 'react';
-import {View, Image, StyleSheet, Dimensions} from 'react-native';
-import Swiper from 'react-native-swiper';
-import bannerPho from '../../../img/pho1.jpg';
-import bannerBoKho from '../../../img/pho3.jpg';
-import bannerBunBo from '../../../img/pho2.jpg';
-import bannerBanhMi from '../../../img/pho4.jpg';
-const {width} = Dimensions.get('window');
+import {View, Image, StyleSheet, Text} from 'react-native';
+import bookingIcon from '../../../icons/bookingIcon.png';
+import market from '../../../icons/market.png';
+import foodIcon from '../../../icons/FoodIcon.png';
+import serviceIcon from '../../../icons/serviceIcon.png';
 export default class Category extends Component {
   render() {
     const {wrapper, imageStyle} = styles;
     return (
       <View style={wrapper}>
-        <Swiper showsPagination width={imageWidth} height={imageHeight}>
-          <Image source={bannerPho} style={imageStyle} />
-          <Image source={bannerBunBo} style={imageStyle} />
-          <Image source={bannerBoKho} style={imageStyle} />
-          <Image source={bannerBanhMi} style={imageStyle} />
-        </Swiper>
+        <View style={styles.serviceTitle}>
+          <Image source={serviceIcon} style={imageStyle} />
+          <Text style={styles.textStyle}>Food</Text>
+        </View>
+        <View style={styles.serviceTitle}>
+          <Image source={bookingIcon} style={imageStyle} />
+          <Text style={styles.textStyle}>Booking</Text>
+        </View>
+        <View style={styles.serviceTitle}>
+          <Image source={market} style={imageStyle} />
+          <Text style={styles.textStyle}>Market</Text>
+        </View>
+        <View style={styles.serviceTitle}>
+          <Image source={foodIcon} style={imageStyle} />
+          <Text style={styles.textStyle}>Services</Text>
+        </View>
       </View>
     );
   }
 }
-const imageWidth = width - 40;
-const imageHeight = imageWidth / 2;
+const imageWidth = 45;
+const imageHeight = 45;
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -35,21 +43,29 @@ const styles = StyleSheet.create({
     padding: 10,
     flex: 1,
     borderRadius: 10,
+    flexDirection: 'row',
   },
   textStyle: {
-    fontSize: 20,
-    color: '#AFAEAF',
+    fontSize: 14,
+    color: '#000',
+    fontFamily: 'Avenir',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   imageStyle: {
     height: imageHeight,
     width: imageWidth,
-    justifyContent: 'center',
-    alignItems: 'center',
+    borderRadius: 10,
   },
   cateTitle: {
     fontSize: 20,
     fontFamily: 'Avenir',
     color: '#FFF',
     fontWeight: 'bold',
+  },
+  serviceTitle: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

@@ -1,134 +1,139 @@
-import React, { Component } from 'react';
-import { View, Image, StyleSheet, Text, Dimensions, ImageBackground } from 'react-native';
-import phoIC from '../../../icons/phoIcon.png';
-import Star from '../../../icons/star.png';
-import beefIC from '../../../icons/beefIcon.png';
-import breadIC from '../../../icons/bread.png';
-const { width, height } = Dimensions.get('window');
+import React, {Component} from 'react';
+import {View, Image, StyleSheet, Text, Dimensions} from 'react-native';
+import Swiper from 'react-native-swiper';
+import phoIC from '../../../img/pho1.jpg';
+import phoIC1 from '../../../img/pho2.jpg';
+import phoIC2 from '../../../img/pho3.jpg';
+import phoIC3 from '../../../img/pho4.jpg';
+const {width, height} = Dimensions.get('window');
 
 class Collection extends Component {
-    render() {
-        const { wrapper, textStyle, imageStyle, viewImage, textChildStyle, imageChildStyle } = styles;
-        return (
-            <View style={{flex: 1}}>
-                <View style={wrapper}>
-                    <View style={viewImage}>
-                        <Image source={phoIC} style={imageStyle} />
-                    </View>
-
-                    <View style={{ justifyContent: 'center', flex: 2, marginLeft: 20 }}>
-                        <Text style={textStyle}>Phở</Text>
-                        <View style={{ flexDirection: 'row', marginBottom: 5 }}>
-                            <Image source={Star} style={imageChildStyle} />
-                            <Image source={Star} style={imageChildStyle} />
-                            <Image source={Star} style={imageChildStyle} />
-                            <Image source={Star} style={imageChildStyle} />
-                            <Image source={Star} style={imageChildStyle} />
-                        </View>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Text style={textChildStyle}>Tái nạm</Text>
-                            <Text style={textChildStyle}>Trứng</Text>
-                            <Text style={textChildStyle}>Bò viên</Text>
-                            <Text style={textChildStyle}>Thập cẩm</Text>
-                        </View>
-
-                    </View>
-                </View>
-                <View style={wrapper}>
-                    <View style={viewImage}>
-                        <Image source={beefIC} style={imageStyle} />
-                    </View>
-
-                    <View style={{ justifyContent: 'center', flex: 2, marginLeft: 20 }}>
-                        <Text style={textStyle}>Bún bò</Text>
-                        <View style={{ flexDirection: 'row', marginBottom: 5 }}>
-                            <Image source={Star} style={imageChildStyle} />
-                            <Image source={Star} style={imageChildStyle} />
-                            <Image source={Star} style={imageChildStyle} />
-                            <Image source={Star} style={imageChildStyle} />
-                            <Image source={Star} style={imageChildStyle} />
-                        </View>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Text style={textChildStyle}>Giò gân</Text>
-                            <Text style={textChildStyle}>Chả cua</Text>
-                            <Text style={textChildStyle}>Chả cây</Text>
-                            <Text style={textChildStyle}>Thập cẩm</Text>
-                        </View>
-
-                    </View>
-                </View>
-                <View style={wrapper}>
-                    <View style={viewImage}>
-                        <Image source={breadIC} style={imageStyle} />
-                    </View>
-
-                    <View style={{ justifyContent: 'center', flex: 2, marginLeft: 20 }}>
-                        <Text style={textStyle}>Bò kho</Text>
-                        <View style={{ flexDirection: 'row', marginBottom: 5 }}>
-                            <Image source={Star} style={imageChildStyle} />
-                            <Image source={Star} style={imageChildStyle} />
-                            <Image source={Star} style={imageChildStyle} />
-                            <Image source={Star} style={imageChildStyle} />
-                            <Image source={Star} style={imageChildStyle} />
-                        </View>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Text style={textChildStyle}>Bánh mì</Text>
-                            <Text style={textChildStyle}>Hủ tiếu</Text>
-                            <Text style={textChildStyle}>Mì gói</Text>
-                            <Text style={textChildStyle}>Thập cẩm</Text>
-                        </View>
-
-                    </View>
-                </View>                
-            </View>
-
-        )
-    }
+  render() {
+    return (
+      <View style={{flex: 1}}>
+        <Swiper
+          style={styles.wrapper}
+          height={height / 3.5}
+          dot={
+            <View
+              style={{
+                backgroundColor: 'rgba(0,0,0,.2)',
+                width: 5,
+                height: 5,
+                borderRadius: 4,
+                marginLeft: 3,
+                marginRight: 3,
+                marginTop: 3,
+                marginBottom: 3,
+              }}
+            />
+          }
+          activeDot={
+            <View
+              style={{
+                backgroundColor: '#000',
+                width: 8,
+                height: 8,
+                borderRadius: 4,
+                marginLeft: 3,
+                marginRight: 3,
+                marginTop: 3,
+                marginBottom: 3,
+              }}
+            />
+          }
+          paginationStyle={{
+            bottom: -23,
+            left: null,
+            right: 10,
+          }}
+          loop>
+          <View
+            style={styles.slide}
+            title={
+              <Text numberOfLines={1}>Aussie tourist dies at Bali hotel</Text>
+            }>
+            <Image resizeMode="stretch" style={styles.image} source={phoIC} />
+          </View>
+          <View
+            style={styles.slide}
+            title={
+              <Text numberOfLines={1}>Big lie behind Nine’s new show</Text>
+            }>
+            <Image resizeMode="stretch" style={styles.image} source={phoIC1} />
+          </View>
+          <View
+            style={styles.slide}
+            title={
+              <Text numberOfLines={1}>Why Stone split from Garfield</Text>
+            }>
+            <Image resizeMode="stretch" style={styles.image} source={phoIC2} />
+          </View>
+          <View
+            style={styles.slide}
+            title={
+              <Text numberOfLines={1}>Learn from Kim K to land that job</Text>
+            }>
+            <Image resizeMode="stretch" style={styles.image} source={phoIC3} />
+          </View>
+        </Swiper>
+      </View>
+    );
+  }
 }
 const imageWidth = width - 40;
 const imageHeight = imageWidth / 2;
 const styles = StyleSheet.create({
-    wrapper: {
-        backgroundColor: '#0396FF',
-        margin: 10,
-        shadowColor: '#2E272B',
-        shadowOffset: { width: 0, height: 3 },
-        shadowOpacity: 0.2,
-        flex: 1,
-        flexDirection: 'row',
-        borderRadius: 10
-    },
-    textStyle: {
-        fontSize: 20,
-        color: '#FFF'
-    },
-    imageStyle: {
-        height: imageHeight / 3,
-        width: imageWidth / 5
-    },
-    viewImage: {
-        flex: 1,
-        borderRadius: 50,
-        backgroundColor: '#FFF',
-        margin: 10,
-        width: width / 4,
-        height: height / 6.3,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    textChildStyle: {
-        backgroundColor: '#fff',
-        marginRight: 5,
-        color: '#0396FF',
-        borderRadius: 5,
-        fontSize: 12,
-        textAlign: 'center',
-        justifyContent: 'center'
-    },
-    imageChildStyle: {
-        width: width / 24,
-        height: height / 50
-    }
-})
+  container: {
+    flex: 1,
+  },
+
+  wrapper: {
+    margin: 10,
+    justifyContent: 'space-between',
+    shadowColor: '#2E272B',
+    shadowOffset: {width: 0, height: 3},
+    shadowOpacity: 0.2,
+    flex: 1,
+  },
+
+  slide: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+  },
+
+  slide1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#9DD6EB',
+  },
+
+  slide2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#97CAE5',
+  },
+
+  slide3: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#92BBD9',
+  },
+
+  text: {
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+
+  image: {
+    width,
+    flex: 1,
+  },
+});
 
 export default Collection;
