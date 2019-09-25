@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   productContainer: {
     //flexDirection: 'row',
     paddingVertical: 15,
-    borderTopColor: '#F0F0F0',
+    borderTopColor: '#E9E9E9',
     borderBottomColor: '#FFF',
     borderLeftColor: '#FFF',
     borderRightColor: '#FFF',

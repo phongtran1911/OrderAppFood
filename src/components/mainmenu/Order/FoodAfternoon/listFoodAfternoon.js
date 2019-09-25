@@ -24,6 +24,8 @@ import ListDrink from '../Food/listDrink';
 import saver from '../../../../utils/saver';
 import {fetchData} from '../../../../redux/actionCreators/foodAction/listFoodAfternoonAction';
 import {fetchDataPostOrderOnlyFood} from '../../../../redux/actionCreators/orderAction/postOrderOnlyFoodAction';
+import {fetchData_Table} from '../../../../redux/actionCreators/orderAction/listOrderAction';
+import {countCartPlus} from '../../../../redux/actionCreators/countCartAction';
 class ListFoodAfternoon extends Component {
   constructor(props) {
     super(props);
@@ -70,13 +72,6 @@ class ListFoodAfternoon extends Component {
       FoodName,
       countCart,
     } = this.state;
-    const result = [];
-    this.state.arrData.map(item => {
-      if (item.id === idFood) {
-        item.count = item.count + 1;
-      }
-      result.push(item);
-    });
     dataInsert.push({
       id: countList,
       listFoodID: '',
@@ -150,10 +145,12 @@ class ListFoodAfternoon extends Component {
         item.note = note;
       }
     });
+    this.props.fetchData_Table(dataInsert, dataCart);
+    this.props.countCartPlus();
     this.setState(
       {
         isVisible: !this.state.isVisible,
-        arrData: result,
+        //arrData: result,
         countCart: countCart + 1,
       },
       () => console.log('dataInsert =', JSON.stringify(this.state.dataInsert)),
@@ -170,18 +167,7 @@ class ListFoodAfternoon extends Component {
       FoodName: name,
     });
   }
-  minusPress(id) {
-    const result = [];
-    this.state.arrData.map(item => {
-      if (item.id === id) {
-        if (item.count > 0) {
-          item.count = item.count - 1;
-        }
-      }
-      result.push(item);
-    });
-    this.setState({arrData: result});
-  }
+  minusPress(id) {}
   plusPressFood() {
     this.setState({countFood: this.state.countFood + 1});
   }
@@ -189,12 +175,14 @@ class ListFoodAfternoon extends Component {
     this.setState({countFood: this.state.countFood - 1});
   }
   onSubmitOrder() {
-    const {dataInsert} = this.state;
+    const {listOrderID} = this.props.mylistOrder;
     var rv = {};
 
-    for (var i = 0; i < dataInsert.length; ++i) {
-      rv[i] = dataInsert[i];
+    for (var i = 0; i < listOrderID.length; ++i) {
+      rv[i] = listOrderID[i];
     }
+    console.log('arr', rv);
+
     this.setState({dataInsert: rv}, () =>
       this.props.fetchDataPostOrderOnlyFood(
         this.state.dataInsert,
@@ -207,10 +195,7 @@ class ListFoodAfternoon extends Component {
     const {width, height} = Dimensions.get('screen');
     return (
       <View style={styles.container}>
-        <HeaderOrderFood
-          countCart={this.state.countCart}
-          dataCart={this.state.dataCart}
-        />
+        <HeaderOrderFood countCart={this.state.countCart} />
         <View style={styles.wrapper}>
           <FlatList
             data={this.state.arrData}
@@ -244,6 +229,7 @@ class ListFoodAfternoon extends Component {
           title="Đặt ngay"
           onPress={() => this.onSubmitOrder()}
           color="#4abfc6"
+          disabled={this.state.dataInsert.length > 0 ? false : true}
         />
         <Modal
           isVisible={this.state.isVisible}
@@ -362,9 +348,11 @@ class ListFoodAfternoon extends Component {
 function mapStateToProps(state) {
   return {
     mylistFoodAfternoon: state.listFoodAfternoon,
+    mylistOrder: state.listOrder,
+    mycountCart: state.countCart,
   };
 }
 export default connect(
   mapStateToProps,
-  {fetchData, fetchDataPostOrderOnlyFood},
+  {fetchData, fetchDataPostOrderOnlyFood, fetchData_Table, countCartPlus},
 )(ListFoodAfternoon);
