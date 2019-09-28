@@ -61,6 +61,7 @@ class ListFoodOrder extends Component {
 
   _keyExtractor = item => item.id;
   onOrder(idCountList) {
+    var {listOrderID, listOrderName} = this.props.mylistOrder;
     const {
       dataInsert,
       dataCart,
@@ -72,41 +73,64 @@ class ListFoodOrder extends Component {
       FoodName,
       countCart,
     } = this.state;
-    // const result = [];
-    // this.state.arrData.map(item => {
-    //   if (item.id === idFood) {
-    //     item.count = item.count + 1;
-    //   }
-    //   result.push(item);
-    // });
-    dataInsert.push({
-      id: countList,
-      listFoodID: '',
-      listFoodTypeID: '',
-      listFoodExceptID: '',
-      listBowlTypeID: '',
-      listFoodAddID: '',
-      listDrinkID: '',
-      quantityFood: 0,
-      idTable: this.props.idTable,
-      is_TakeAwayDetail: false,
-      note: '',
-    });
-
-    dataCart.push({
-      id: countList,
-      listFoodName: '',
-      listFoodTypeName: '',
-      listFoodExceptName: '',
-      listBowlTypeName: '',
-      listFoodAddName: '',
-      listDrinkName: '',
-      quantityFood: 0,
-      TableName: this.props.TableName,
-      is_TakeAwayDetail: false,
-      note: '',
-    });
-    dataInsert.map(item => {
+    if (listOrderID === undefined || listOrderName === undefined) {
+      dataInsert.push({
+        id: countList,
+        listFoodID: '',
+        listFoodTypeID: '',
+        listFoodExceptID: '',
+        listBowlTypeID: '',
+        listFoodAddID: '',
+        listDrinkID: '',
+        quantityFood: 0,
+        idTable: this.props.idTable,
+        is_TakeAwayDetail: false,
+        note: '',
+      });
+      dataCart.push({
+        id: countList,
+        listFoodName: '',
+        listFoodTypeName: '',
+        listFoodExceptName: '',
+        listBowlTypeName: '',
+        listFoodAddName: '',
+        listDrinkName: '',
+        quantityFood: 0,
+        TableName: this.props.TableName,
+        is_TakeAwayDetail: false,
+        note: '',
+      });
+      listOrderID = dataInsert;
+      listOrderName = dataCart;
+    } else {
+      listOrderID.push({
+        id: countList,
+        listFoodID: '',
+        listFoodTypeID: '',
+        listFoodExceptID: '',
+        listBowlTypeID: '',
+        listFoodAddID: '',
+        listDrinkID: '',
+        quantityFood: 0,
+        idTable: this.props.idTable,
+        is_TakeAwayDetail: false,
+        note: '',
+      });
+      listOrderName.push({
+        id: countList,
+        listFoodName: '',
+        listFoodTypeName: '',
+        listFoodExceptName: '',
+        listBowlTypeName: '',
+        listFoodAddName: '',
+        listDrinkName: '',
+        quantityFood: 0,
+        TableName: this.props.TableName,
+        is_TakeAwayDetail: false,
+        note: '',
+      });
+    }
+    listOrderID.map(item => {
       if (item.id === idCountList) {
         item.listFoodID = idFood;
         if (saver.getDataFoodTypeID() !== undefined) {
@@ -129,7 +153,7 @@ class ListFoodOrder extends Component {
         item.note = note;
       }
     });
-    dataCart.map(item => {
+    listOrderName.map(item => {
       if (item.id === idCountList) {
         item.listFoodName = FoodName;
         if (saver.getDataFoodTypeName() !== undefined) {
@@ -152,7 +176,7 @@ class ListFoodOrder extends Component {
         item.note = note;
       }
     });
-    this.props.fetchData_Table(dataInsert, dataCart);
+    this.props.fetchData_Table(listOrderID, listOrderName);
     this.props.countCartPlus();
     this.setState(
       {
@@ -160,7 +184,7 @@ class ListFoodOrder extends Component {
         //arrData: result,
         countCart: countCart + 1,
       },
-      () => console.log('dataInsert =', JSON.stringify(this.state.dataInsert)),
+      () => console.log('dataInsert =', JSON.stringify(listOrderID)),
     );
   }
   plusPress(id, name) {
@@ -202,12 +226,8 @@ class ListFoodOrder extends Component {
     for (var i = 0; i < listOrderID.length; ++i) {
       rv[i] = listOrderID[i];
     }
-    console.log('arr', rv);
     this.setState({dataInsert: rv}, () =>
-      this.props.fetchDataPostOrderOnlyFood(
-        this.state.dataInsert,
-        global.getonSignIn(),
-      ),
+      this.props.fetchDataPostOrderOnlyFood(rv, global.getonSignIn()),
     ); // () => console.log("dataInsert =", JSON.stringify(this.state.dataInsert))
     Actions.pop();
   }

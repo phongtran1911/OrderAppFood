@@ -1,6 +1,6 @@
 const defaultListOrder = {
-  listOrderID: null,
-  listOrderName: null,
+  listOrderID: undefined,
+  listOrderName: undefined,
 };
 
 const listOrderReducer = (state = defaultListOrder, action) => {

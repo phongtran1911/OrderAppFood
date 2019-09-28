@@ -14,6 +14,8 @@ import icBack from '../../../icons/back_white.png';
 import icCart from '../../../icons/cart.png';
 import icTrash from '../../../icons/trash.png';
 import styles from '../../styles/listStyle';
+import icPlus from '../../../icons/plusAdd.png';
+import icMinus from '../../../icons/minusAdd.png';
 import pho from './../../../img/404-not-found.jpg';
 import {connect} from 'react-redux';
 import {fetchData_Table} from '../../../redux/actionCreators/orderAction/listOrderAction';
@@ -58,6 +60,48 @@ class HeaderOrderFood extends Component {
     this.props.fetchData_Table(resultID, resultName);
     this.props.countCartMinus();
     this.setState({arrData: resultName});
+  }
+  plusPressFood(id) {
+    const {listOrderID, listOrderName} = this.props.mylistOrder;
+    const resultID = [];
+    const resultName = [];
+    listOrderID.map(item => {
+      if (item.id === id) {
+        item.quantityFood = item.quantityFood + 1;
+      }
+      resultID.push(item);
+    });
+    listOrderName.map(item => {
+      if (item.id === id) {
+        item.quantityFood = item.quantityFood + 1;
+      }
+      resultName.push(item);
+    });
+    this.setState({arrData: resultName});
+    this.props.fetchData_Table(resultID, resultName);
+  }
+  minusPressFood(id) {
+    const {listOrderID, listOrderName} = this.props.mylistOrder;
+    const resultID = [];
+    const resultName = [];
+    listOrderID.map(item => {
+      if (item.id === id) {
+        if (item.quantityFood > 1) {
+          item.quantityFood = item.quantityFood - 1;
+        }
+      }
+      resultID.push(item);
+    });
+    listOrderName.map(item => {
+      if (item.id === id) {
+        if (item.quantityFood > 1) {
+          item.quantityFood = item.quantityFood - 1;
+        }
+      }
+      resultName.push(item);
+    });
+    this.setState({arrData: resultName});
+    this.props.fetchData_Table(resultID, resultName);
   }
   render() {
     const {wrapper, row1, iconStyle, titleStyle, countItemStyle} = styles1;
@@ -124,11 +168,31 @@ class HeaderOrderFood extends Component {
                     {item.is_TakeAwayDetail === true ? (
                       <Text style={styles.txtPrice}>Mang về</Text>
                     ) : null}
-
-                    <View style={styles.lastRowInfo}>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent: 'flex-start',
+                        alignItems: 'baseline',
+                      }}>
+                      {this.state.countFood < 2 ? null : (
+                        <TouchableOpacity
+                          onPress={() => this.minusPressFood(item.id)}>
+                          <Image source={icMinus} style={styles.icStyle} />
+                        </TouchableOpacity>
+                      )}
                       <Text style={styles.txtShowDetail}>
-                        Số lượng : {item.quantityFood}
+                        {item.quantityFood}
                       </Text>
+
+                      <TouchableOpacity
+                        onPress={() => this.plusPressFood(item.id)}>
+                        <Image source={icPlus} style={styles.icStyle} />
+                      </TouchableOpacity>
+                    </View>
+                    <View style={styles.lastRowInfo}>
+                      {/* <Text style={styles.txtShowDetail}>
+                        Số lượng : {item.quantityFood}
+                      </Text> */}
                       <TouchableOpacity onPress={() => this.onDelete(item.id)}>
                         <Image source={icTrash} style={styles.icStyle} />
                       </TouchableOpacity>
