@@ -240,7 +240,9 @@ class ListFoodOrder extends Component {
           <FlatList
             data={this.state.arrData}
             renderItem={({item}) => (
-              <View style={styles.productContainer}>
+              <TouchableOpacity
+                style={styles.productContainer}
+                onPress={() => this.plusPress(item.id, item.Name)}>
                 <Image style={styles.productImage} source={pho} />
                 <View style={styles.productInfo}>
                   <Text style={styles.txtName}>{item.Name}</Text>
@@ -268,7 +270,7 @@ class ListFoodOrder extends Component {
                     </TouchableOpacity>
                   </View>
                 </View>
-              </View>
+              </TouchableOpacity>
             )}
             keyExtractor={this._keyExtractor}
           />
