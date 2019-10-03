@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PushController from './pushController';
 import {Provider} from 'react-redux';
 import {StatusBar, BackHandler, Alert} from 'react-native';
 import {Router, Scene, Actions} from 'react-native-router-flux';
@@ -17,6 +18,8 @@ import EditOrdered from './components/mainmenu/Ordered/editOrdered';
 import store from './redux/store';
 import getToken from './components/api/getToken';
 import global from './global';
+import firebase from 'react-native-firebase';
+
 StatusBar.setHidden(true);
 export default class Index extends Component {
   async componentDidMount() {
@@ -109,6 +112,7 @@ export default class Index extends Component {
             />
           </Scene>
         </Router>
+        <PushController />
       </Provider>
     );
   }

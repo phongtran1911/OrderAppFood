@@ -22,6 +22,7 @@ import {connect} from 'react-redux';
 import {fetchData} from '../../../../redux/actionCreators/foodAction/listFoodAction';
 import {fetchDataPostOrderOnlyFood} from '../../../../redux/actionCreators/orderAction/postOrderOnlyFoodAction';
 import {fetchData_Table} from '../../../../redux/actionCreators/orderAction/listOrderAction';
+import {fetchDataSendNoti} from '../../../../redux/actionCreators/getSendNotiAction';
 import {countCartPlus} from '../../../../redux/actionCreators/countCartAction';
 import pho from '../../../../img/404-not-found.jpg';
 import icPlus from '../../../../icons/plusAdd.png';
@@ -226,8 +227,10 @@ class ListFoodOrder extends Component {
     for (var i = 0; i < listOrderID.length; ++i) {
       rv[i] = listOrderID[i];
     }
-    this.setState({dataInsert: rv}, () =>
+    this.setState(
+      {dataInsert: rv},
       this.props.fetchDataPostOrderOnlyFood(rv, global.getonSignIn()),
+      this.props.fetchDataSendNoti(global.getTokenDevice()),
     ); // () => console.log("dataInsert =", JSON.stringify(this.state.dataInsert))
     Actions.pop();
   }
@@ -442,5 +445,6 @@ export default connect(
     fetchDataPostOrderOnlyFood,
     fetchData_Table,
     countCartPlus,
+    fetchDataSendNoti,
   },
 )(ListFoodOrder);
