@@ -11,6 +11,7 @@ import icExit from '../../../icons/exit.png';
 import icLogo from '../../../icons/ic_food.png';
 import {Actions} from 'react-native-router-flux';
 import saveToken from '../../api/saveToken';
+import saveTokenDevice from '../../api/saveTokenDevice';
 const {height} = Dimensions.get('window');
 
 export default class Header extends Component {
@@ -21,6 +22,7 @@ export default class Header extends Component {
   onSignOut() {
     this.setState({user: null});
     saveToken('');
+    saveTokenDevice('');
     Actions.login();
   }
   render() {

@@ -36,6 +36,7 @@ export default class Login extends Component {
         if (obj.status == 'success') {
           Actions.mainmenu();
           saveToken(obj.user.id.toString());
+          global.setonSignIn(obj.user.id);
         } else {
           alert('Tên đăng nhập hoặc mật khẩu sai!');
           //console.log(obj.status);

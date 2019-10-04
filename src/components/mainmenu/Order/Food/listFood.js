@@ -230,7 +230,7 @@ class ListFoodOrder extends Component {
     this.setState(
       {dataInsert: rv},
       this.props.fetchDataPostOrderOnlyFood(rv, global.getonSignIn()),
-      this.props.fetchDataSendNoti(global.getTokenDevice()),
+      this.props.fetchDataSendNoti(),
     ); // () => console.log("dataInsert =", JSON.stringify(this.state.dataInsert))
     Actions.pop();
   }

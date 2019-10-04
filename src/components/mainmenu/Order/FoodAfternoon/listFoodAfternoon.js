@@ -25,6 +25,7 @@ import saver from '../../../../utils/saver';
 import {fetchData} from '../../../../redux/actionCreators/foodAction/listFoodAfternoonAction';
 import {fetchDataPostOrderOnlyFood} from '../../../../redux/actionCreators/orderAction/postOrderOnlyFoodAction';
 import {fetchData_Table} from '../../../../redux/actionCreators/orderAction/listOrderAction';
+import {fetchDataSendNoti} from '../../../../redux/actionCreators/getSendNotiAction';
 import {countCartPlus} from '../../../../redux/actionCreators/countCartAction';
 class ListFoodAfternoon extends Component {
   constructor(props) {
@@ -212,8 +213,10 @@ class ListFoodAfternoon extends Component {
     for (var i = 0; i < listOrderID.length; ++i) {
       rv[i] = listOrderID[i];
     }
-    this.setState({dataInsert: rv}, () =>
-      this.props.fetchDataPostOrderOnlyFood(rv, global.getonSignIn()),
+    this.setState(
+      {dataInsert: rv},
+      () => this.props.fetchDataPostOrderOnlyFood(rv, global.getonSignIn()),
+      this.props.fetchDataSendNoti(),
     ); // () => console.log("dataInsert =", JSON.stringify(this.state.dataInsert))
     Actions.pop();
   }
@@ -382,5 +385,11 @@ function mapStateToProps(state) {
 }
 export default connect(
   mapStateToProps,
-  {fetchData, fetchDataPostOrderOnlyFood, fetchData_Table, countCartPlus},
+  {
+    fetchData,
+    fetchDataPostOrderOnlyFood,
+    fetchData_Table,
+    countCartPlus,
+    fetchDataSendNoti,
+  },
 )(ListFoodAfternoon);
