@@ -38,6 +38,8 @@ export default class PushController extends Component {
       },
       popInitialNotification: true,
       requestPermissions: true,
+      largeIcon: 'ic_launcher',
+      smallIcon: 'ic_launcher',
     });
   }
 

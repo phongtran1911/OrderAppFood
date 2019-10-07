@@ -1,7 +1,15 @@
 import React, {Component} from 'react';
-import {View, FlatList, Text, TouchableOpacity, Image} from 'react-native';
+import {
+  View,
+  FlatList,
+  Text,
+  TouchableOpacity,
+  Image,
+  Button,
+} from 'react-native';
 import {connect} from 'react-redux';
 import {fetchData} from '../../../redux/actionCreators/orderedAction/listOrderedAction';
+import {fetchDataTableOrdered} from '../../../redux/actionCreators/orderedAction/listTableOrderedAction';
 import styles from '../../styles/mainStyle';
 import icEdit from '../../../icons/edit.png';
 import icConfirm from '../../../icons/confirm.png';
@@ -10,22 +18,34 @@ import {
   fetchDataUpdateStatusOrdered,
   fetchDataDeleteOrderDetail,
 } from '../../../redux/actionCreators/orderedAction/postOrderedAction';
+import {fetchDataUpdateStatusMainOrder} from '../../../redux/actionCreators/orderedAction/postUpdateOrderDetailAction';
 import {Actions} from 'react-native-router-flux';
 class ListOrdered extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      refreshing: false,
-    };
+    this.state = {};
   }
   componentDidMount() {
-    this.props.fetchData();
+    this.props.fetchData(this.props.idOrder);
   }
-  onUpdateStatus(id) {
-    this.props.fetchDataUpdateStatusOrdered(id);
+  onUpdateStatus(id, idOrder) {
+    this.props.fetchDataUpdateStatusOrdered(id, idOrder);
   }
   onDeleteOrderDetail(idOrder, idOrdered) {
     this.props.fetchDataDeleteOrderDetail(idOrder, idOrdered);
+    if (this.props.mylistOrdered.listOrdered.length <= 1) {
+      Actions.pop();
+      this.props.fetchDataTableOrdered();
+    }
+  }
+  onSubmitOrder(idOrder) {
+    this.props.fetchDataUpdateStatusMainOrder(idOrder);
+    if (this.props.mypostUpdateOrderDetail.errorUpdateOrderDetail === true) {
+      alert('Vẫn còn món ăn chưa làm!');
+      return;
+    }
+    Actions.pop();
+    this.props.fetchDataTableOrdered();
   }
   _keyExtractor = item => item.id;
   render() {
@@ -44,7 +64,9 @@ class ListOrdered extends Component {
                     {item.idDelivery > 1 ? null : (
                       <View style={{flexDirection: 'row'}}>
                         <TouchableOpacity
-                          onPress={() => this.onUpdateStatus(item.id)}>
+                          onPress={() =>
+                            this.onUpdateStatus(item.id, item.idOrder)
+                          }>
                           <Image source={icConfirm} style={styles.icStyle} />
                         </TouchableOpacity>
                         <TouchableOpacity
@@ -102,13 +124,20 @@ class ListOrdered extends Component {
                 </View>
               </View>
             )}
-            onRefresh={() => {
-              this.setState({refreshing: true});
-              this.props.fetchData();
-              this.setState({refreshing: false});
-            }}
-            refreshing={this.state.refreshing}
             keyExtractor={this._keyExtractor}
+          />
+        </View>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'flex-end',
+            backgroundColor: '#FFF',
+          }}>
+          <Button
+            title="Đã xong"
+            onPress={() => {
+              this.onSubmitOrder(this.props.idOrder);
+            }}
           />
         </View>
       </View>
@@ -118,6 +147,7 @@ class ListOrdered extends Component {
 function mapStateToProps(state) {
   return {
     mylistOrdered: state.listOrdered,
+    mypostUpdateOrderDetail: state.postUpdateOrderDetail,
   };
 }
 export default connect(
@@ -126,5 +156,7 @@ export default connect(
     fetchData,
     fetchDataUpdateStatusOrdered,
     fetchDataDeleteOrderDetail,
+    fetchDataUpdateStatusMainOrder,
+    fetchDataTableOrdered,
   },
 )(ListOrdered);

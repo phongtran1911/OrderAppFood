@@ -94,6 +94,7 @@ class EditOrdered extends Component {
     this.props.fetchDataGetOrderDetail(this.props.idOrderDetail);
     this.props.fetchDateGetExceptOrderDetail(this.props.idOrderDetail);
     this.props.fetchDateGetTypeOrderDetail(this.props.idOrderDetail);
+    console.log(this.props.idTable);
   }
   plusPressFood() {
     this.setState({countFood: this.state.countFood + 1});
@@ -123,6 +124,8 @@ class EditOrdered extends Component {
         }
         if (saver.getDataTableID() !== undefined) {
           item.idTable = saver.getDataTableID();
+        } else {
+          item.idTable = this.props.idTable;
         }
         item.quantityFood = countFood;
         item.is_TakeAwayDetail = is_TakeAwayDetail;
@@ -140,7 +143,7 @@ class EditOrdered extends Component {
         this.props.fetchDataPostUpdateOrderDetail(
           this.state.arrData,
           this.props.idOrderDetail,
-        ),
+        ), //console.log("hihi", JSON.stringify(this.state.arrData) + this.props.idOrderDetail),
       //console.log("hihi", JSON.stringify(this.state.arrData)),
     ); // () =>     this.props.fetchDataPostUpdateOrderDetail(      this.state.arrData,      this.props.idOrderDetail,    ),
     Actions.pop();

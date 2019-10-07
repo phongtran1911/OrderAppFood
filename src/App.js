@@ -15,10 +15,10 @@ import ListFoodOrder from './components/mainmenu/Order/Food/listFood';
 import ListFoodAfternoon from './components/mainmenu/Order/FoodAfternoon/listFoodAfternoon';
 import Order from './components/mainmenu/Order/order';
 import EditOrdered from './components/mainmenu/Ordered/editOrdered';
+import ListOrdered from './components/mainmenu/Ordered/listOrdered';
 import store from './redux/store';
 import getToken from './components/api/getToken';
 import global from './global';
-import firebase from 'react-native-firebase';
 
 StatusBar.setHidden(true);
 export default class Index extends Component {
@@ -109,6 +109,11 @@ export default class Index extends Component {
               key="editordered"
               component={EditOrdered}
               title="Sửa món ăn"
+            />
+            <Scene
+              key="listtableordered"
+              component={ListOrdered}
+              title="Món ăn đã đặt"
             />
           </Scene>
         </Router>

@@ -35,7 +35,7 @@ class HeaderOrderFood extends Component {
   onShow() {
     const {arrData} = this.state;
     const {listOrderName} = this.props.mylistOrder;
-    if (listOrderName !== null) {
+    if (listOrderName !== null && listOrderName !== undefined) {
       for (var i = 0; i < listOrderName.length; i++) {
         arrData.push(listOrderName[i]);
       }

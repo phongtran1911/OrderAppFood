@@ -74,6 +74,19 @@ class ListFoodOrder extends Component {
       FoodName,
       countCart,
     } = this.state;
+    if (this.state.idFood < 4 && saver.getDataFoodTypeID() === undefined) {
+      alert('Vui lòng chọn món ăn kèm!');
+      return;
+    } else if (
+      this.state.idFood === '5' &&
+      saver.getDataFoodAddID() === undefined
+    ) {
+      alert('Vui lòng chọn món ăn thêm!');
+      return;
+    } else if (this.state.idFood > 5 && saver.getDataDrinkID() === undefined) {
+      alert('Vui lòng chọn nước!');
+      return;
+    }
     if (listOrderID === undefined || listOrderName === undefined) {
       dataInsert.push({
         id: countList,
@@ -221,6 +234,10 @@ class ListFoodOrder extends Component {
     this.props.fetchData();
   }
   onSubmitOrder() {
+    if (this.props.mycountCart <= 0) {
+      alert('Vui lòng chọn món ăn!');
+      return;
+    }
     const {listOrderID} = this.props.mylistOrder;
     var rv = {};
 

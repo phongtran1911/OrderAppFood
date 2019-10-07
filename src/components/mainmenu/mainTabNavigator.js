@@ -3,7 +3,7 @@ import {View, Image, StyleSheet} from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 import Home from '../mainmenu/Home/home';
 import MainOrder from './Order/mainorder';
-import Ordered from './Ordered/listOrdered';
+import Ordered from './Ordered/listTableOrdered';
 import Menu from './MenuFood/menu';
 import Header from '../mainmenu/Drawer/header';
 class MainTabNavigator extends Component {
@@ -78,7 +78,6 @@ class MainTabNavigator extends Component {
                 style={iconStyle}
               />
             )}
-            badgeText="5"
             onPress={() => this.setState({selectedTab: 'ordered'})}
             titleStyle={styles.titleStyle}
             selectedTitleStyle={styles.selectedTitleStyle}>

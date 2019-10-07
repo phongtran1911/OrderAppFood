@@ -15,10 +15,10 @@ export function fetchError() {
   return {type: 'FETCH_ERROR_DATA_ORDERED'};
 }
 
-export function fetchData() {
+export function fetchData(idOrder) {
   return dispatch => {
     dispatch(startFetchData());
-    getListOrdered()
+    getListOrdered(idOrder)
       .then(list => dispatch(fetchSuccess(list)))
       .catch(() => dispatch(fetchError()));
   };
