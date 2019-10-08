@@ -28,21 +28,7 @@ target 'OrderAppFood' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
   pod 'RNFirebase', :path => '../node_modules/react-native-firebase'
-
-  target 'OrderAppFoodTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
+  pod 'Firebase/Core', '~> 6.3.0'	
+  pod 'Firebase/Messaging', '~> 6.3.0'
   use_native_modules!
-end
-
-target 'OrderAppFood-tvOS' do
-  # Pods for OrderAppFood-tvOS
-
-  target 'OrderAppFood-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
 end
